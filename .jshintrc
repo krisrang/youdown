@@ -7,7 +7,8 @@
     "Ember": true,
     "Em": true,
     "DS": true,
-    "$": true
+    "$": true,
+    "i18n": true
   },
   "node" : true,
   "browser" : false,

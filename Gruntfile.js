@@ -43,17 +43,23 @@ module.exports = function(grunt) {
     nodewebkit: {
       options: {
         version: '0.9.2',
-        build_dir: './build', // Where the build version of my node-webkit app is saved
-        mac_icns: './images/youdown.icns', // Path to the Mac icon file
+        build_dir: './build',
+        mac_icns: './images/youdown.icns',
         mac: buildPlatforms.mac,
         win: buildPlatforms.win,
         linux32: buildPlatforms.linux32,
         linux64: buildPlatforms.linux64
       },
-      src: ['./css/**', './fonts/**', './images/**', './js/**', './language/**', './node_modules/**', '!./node_modules/bower/**', '!./node_modules/grunt*/**', './Config.rb', './index.html', './package.json', './README.md' ] // Your node-webkit app './**/*'
+      src: ['./css/**', './fonts/**', './images/**', './js/**', './language/**', './node_modules/**', '!./node_modules/bower/**', '!./node_modules/grunt*/**', './Config.rb', './index.html', './package.json', './README.md' ]
     },
     copy: {
-      main: {
+      vendor: {
+        files: [
+          { src: 'vendor/fontawesome/css/font-awesome.css', dest: 'css/', expand: true, flatten: true },
+          { src: 'vendor/fontawesome/fonts/*', dest: 'fonts/', expand: true, flatten: true }
+        ]
+      },
+      libs: {
         files: [
           {
             src: 'lib/win/ffmpegsumo.dll',
@@ -87,6 +93,20 @@ module.exports = function(grunt) {
           }
         ]
       }
+    },
+    shell: {
+      start: {
+        options: {
+          stdout: true
+        },
+        command: '/Applications/node-webkit.app/Contents/MacOS/node-webkit .'
+      },
+      debug: {
+        options: {
+          stdout: true
+        },
+        command: '/Applications/node-webkit.app/Contents/MacOS/node-webkit . --debug'
+      }
     }
   });
 
@@ -94,10 +114,10 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-node-webkit-builder');
+  grunt.loadNpmTasks('grunt-shell');
 
-  grunt.registerTask('css', ['compass']);
-  grunt.registerTask('default', ['compass']);
-  grunt.registerTask('nodewkbuild', ['nodewebkit', 'copy:main']);
-  grunt.registerTask('build', ['default', 'nodewkbuild']);
-
+  grunt.registerTask('assets', ['copy:vendor', 'compass']);
+  grunt.registerTask('default', ['assets', 'shell:debug']);
+  grunt.registerTask('nodewkbuild', ['nodewebkit', 'copy:libs']);
+  grunt.registerTask('build', ['assets', 'nodewkbuild']);
 };

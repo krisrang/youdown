@@ -35,6 +35,7 @@
     "grunt-contrib-watch": "0.6.1",
     "grunt-node-webkit-builder": "0.1.18",
     "grunt-es6-module-transpiler": "~0.6.0",
-    "grunt-ember-templates": "~0.4.20"
+    "grunt-ember-templates": "~0.4.20",
+    "grunt-shell": "^0.6.4"
   }
 }
