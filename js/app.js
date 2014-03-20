@@ -1,16 +1,18 @@
 var applicationRoot = './',
-    gui = require('nw.gui'),
-    isDebug = gui.App.argv.indexOf('--debug') > -1,
-    win = gui.Window.get(),
-    os = require('os'),
-    path = require('path'),
-    fs = require('fs'),
-    url = require('url'),
-    i18n = require("i18n"),
-    isWin = (process.platform === 'win32'),
-    isLinux = (process.platform === 'linux'),
-    isOSX = (process.platform === 'darwin'),
-    BUTTON_ORDER = ['min', 'max', 'close'];
+    config          = require('./js/config'),
+    gui             = require('nw.gui'),
+    isDebug         = gui.App.argv.indexOf('--debug') > -1,
+    win             = gui.Window.get(),
+    os              = require('os'),
+    path            = require('path'),
+    fs              = require('fs'),
+    url             = require('url'),
+    i18n            = require("i18n"),
+    raven           = require("raven"),
+    isWin           = (process.platform === 'win32'),
+    isLinux         = (process.platform === 'linux'),
+    isOSX           = (process.platform === 'darwin'),
+    BUTTON_ORDER    = ['min', 'max', 'close'];
 
 if (isOSX)   { BUTTON_ORDER = ['close', 'min', 'max']; }
 
@@ -68,6 +70,10 @@ window.addEventListener("drop", preventDefault, false);
 // Prevent dragging files outside the window
 window.addEventListener("dragstart", preventDefault, false);
 
-process.on('uncaughtException', function(err) {
-  if (console) console.log(err);
+var ravenClient = new raven.Client(config.raven);
+window.RavenClient = ravenClient;
+
+ravenClient.patchGlobal(function(logged, err) {
+  // if (console) console.log(err);
+  process.exit(1);
 });

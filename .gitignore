@@ -1,5 +1,6 @@
 /.sass-cache
 /build
+/js/vendor/*
 /node_modules
 /vendor/*
 

@@ -1,0 +1,2 @@
+window.ENV = {};
+window.YouDown = {};
