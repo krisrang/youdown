@@ -1,5 +1,4 @@
-var applicationRoot = './',
-    config          = require('./js/config'),
+var applicationRoot = './',    
     gui             = require('nw.gui'),
     isDebug         = gui.App.argv.indexOf('--debug') > -1,
     win             = gui.Window.get(),
@@ -9,16 +8,16 @@ var applicationRoot = './',
     url             = require('url'),
     i18n            = require("i18n"),
     raven           = require("raven"),
+    
+    _               = require('./js/vendor/lodash'),
+    config          = require('./js/config'),
+    
     isWin           = (process.platform === 'win32'),
     isLinux         = (process.platform === 'linux'),
-    isOSX           = (process.platform === 'darwin'),
-    BUTTON_ORDER    = ['min', 'max', 'close'];
+    isOSX           = (process.platform === 'darwin');
 
-if (isOSX)   { BUTTON_ORDER = ['close', 'min', 'max']; }
-
-// render header buttons
-// $("#header").html(_.template($('#header-tpl').html(), {buttons: BUTTON_ORDER}));
-
+config.button_order = ['min', 'max', 'close'];
+if (isOSX) { config.button_order = ['close', 'min', 'max']; }
 
 // Not debugging, hide all messages!
 if (!isDebug) {
@@ -48,8 +47,9 @@ if (!isDebug) {
     // F11 Reloads
     if( event.keyCode === 122 ) { win.reloadIgnoringCache(); }
   });
+  
+  win.showDevTools();
 }
-
 
 // Set the app title (for Windows mostly)
 win.title = 'YouDown';
@@ -73,7 +73,9 @@ window.addEventListener("dragstart", preventDefault, false);
 var ravenClient = new raven.Client(config.raven);
 window.RavenClient = ravenClient;
 
-ravenClient.patchGlobal(function(logged, err) {
-  // if (console) console.log(err);
-  process.exit(1);
-});
+if (!isDebug) {
+  ravenClient.patchGlobal(function(logged, err) {
+    // if (console) console.log(err);
+    process.exit(1);
+  });
+}

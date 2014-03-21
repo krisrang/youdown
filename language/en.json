@@ -1,3 +1,7 @@
 {
-  "title": "YouDown"
+	"title": "YouDown",
+	"download": "Download",
+  "enter_url": "Paste YouTube URL",
+  "result": "Format",
+  "1080": "MP4 1080p"
 }

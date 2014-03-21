@@ -46,15 +46,27 @@ module.exports = function(grunt) {
     },
     watch: {
       sass: {
-        files: ['sass/**/*.scss'],
-        tasks: ['compass'],
+        files: ['sass/*.scss'],
+        tasks: ['compass:dist']
+      },
+      handlebars: {
+        files: ["js/youdown/templates/**/*.hbs"],
+        tasks: ['emberTemplates']
+      },
+      js: {
+        files: ["js/**/*.js"],
+        tasks: [],
         options: {
           livereload: true
         }
       },
-      emberTemplates: {
-        files: ["js/youdown/templates/**/*.hbs"],
-        tasks: ['emberTemplates'],
+      css: {
+        files: ['css/*.css'],
+        options: { livereload: true }
+      },
+      html: {
+        files: ["index.html"],
+        tasks: [],
         options: {
           livereload: true
         }
@@ -78,8 +90,11 @@ module.exports = function(grunt) {
           { src: 'vendor/fontawesome/css/font-awesome.css', dest: 'css/', expand: true, flatten: true },
           { src: 'vendor/fontawesome/fonts/*', dest: 'fonts/', expand: true, flatten: true },
           { src: 'vendor/jquery/dist/jquery.js', dest: 'js/vendor/', expand: true, flatten: true },
+          { src: 'vendor/lodash/dist/lodash.js', dest: 'js/vendor/', expand: true, flatten: true },
           { src: 'vendor/handlebars/handlebars.js', dest: 'js/vendor/', expand: true, flatten: true },
-          { src: 'vendor/ember/ember.js', dest: 'js/vendor/', expand: true, flatten: true }
+          { src: 'vendor/ember/ember.js', dest: 'js/vendor/', expand: true, flatten: true },
+          { src: 'vendor/bootstrap/dist/css/bootstrap.css', dest: 'css/', expand: true, flatten: true },
+          { src: 'vendor/bootstrap/dist/js/bootstrap.js', dest: 'js/vendor/', expand: true, flatten: true }
         ]
       },
       build: {
@@ -152,14 +167,15 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-compass');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-copy');
+  grunt.loadNpmTasks('grunt-concurrent');
+  grunt.loadNpmTasks('grunt-ember-templates');
   grunt.loadNpmTasks('grunt-node-webkit-builder');
   grunt.loadNpmTasks('grunt-shell');
-  grunt.loadNpmTasks('grunt-ember-templates');
-  grunt.loadNpmTasks('grunt-concurrent');
 
   grunt.registerTask('assets', ['concurrent:assets']);
-  grunt.registerTask('assets:build', ['copy:build']);
-  grunt.registerTask('default', ['assets', 'concurrent:debug']);
+  grunt.registerTask('assets:build', ['assets', 'copy:build']);
   grunt.registerTask('nodewkbuild', ['nodewebkit', 'copy:libs']);
-  grunt.registerTask('build', ['assets', 'assets:build', 'nodewkbuild']);
+  
+  grunt.registerTask('default', ['assets', 'concurrent:debug']);
+  grunt.registerTask('build', ['assets:build', 'nodewkbuild']);
 };

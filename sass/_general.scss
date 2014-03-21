@@ -1,0 +1,26 @@
+html,
+body {
+  height: 100%;
+  overflow: hidden;
+  width: $app_width;
+}
+
+body {
+  -webkit-user-select: none;
+  -webkit-font-smoothing: antialiased;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  background: $body_bg url('/images/brushed.png') repeat;
+  color: $text_color;
+  border-radius: $radius;
+  cursor: default; 
+}
+
+button:hover { cursor: pointer; }
+:focus { outline: 0; }
+a { text-decoration: none; }
+
+input {
+  border: 1px solid $border;
+  padding: 10px;
+  border-radius: $radius;
+}

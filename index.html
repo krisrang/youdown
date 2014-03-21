@@ -4,18 +4,47 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="css/app.css">
   </head>
-  <body>    
+  <body>
     <!-- nw setup  -->
     <script src="js/app.js"></script>
     <script src="js/i18n.js"></script>
-  
+    
     <script src="js/vendor/jquery.js"></script>
     <script src="js/vendor/handlebars.js"></script>
     <script src="js/vendor/ember.js"></script>
+    <script src="js/vendor/lodash.js"></script>
     
     <!-- Ember app -->
     <script src="js/youdown/env.js"></script>
-    <script src="js/youdown/templates.js"></script>
     <script src="js/youdown/youdown.js"></script>
+    <script src="js/youdown/lib/utilities.js"></script>
+    <script src="js/youdown/lib/ytdl.js"></script>
+    <script src="js/youdown/helpers/helpers.js"></script>
+    <script src="js/youdown/models/video.js"></script>
+    <script src="js/youdown/models/video_format.js"></script>
+    <script src="js/youdown/controllers/application_controller.js"></script>
+    <script src="js/youdown/controllers/input_controller.js"></script>
+    <script src="js/youdown/views/view.js"></script>
+    <script src="js/youdown/views/index_view.js"></script>
+    <script src="js/youdown/views/text_field.js"></script>
+    <script src="js/youdown/templates.js"></script>
+    
+    <script>
+      if (isDebug) {
+        var load = function() {
+          var previous, script;
+            
+          script = document.createElement("script");
+          script.src= 'http://localhost:35729/livereload.js';
+          script.type= "text/javascript";
+          script.async= true;
+          
+          previous = document.getElementsByTagName("script")[0];
+          return previous.parentNode.insertBefore(script, previous);
+        };
+        
+        window.addEventListener("load", load);
+      }
+    </script>
   </body>
 </html>
