@@ -1,0 +1,51 @@
+#input {
+  padding: 20px;
+  border-bottom: 1px solid $border;
+  background: $body_bg;
+  position: relative;
+  
+  .inputstatus {
+    position: absolute;
+    text-align: center;
+    width: 50px;
+    height: 18px;
+    top: 30px;
+    right: 30px;
+    font-size: 12px;
+    color: #fff;
+    font-weight: bold;
+    line-height: 18px;
+    border-radius: $radius;
+    background-position: right;
+    background-repeat: no-repeat;
+  }
+  
+  &.processing .inputstatus {
+    background-image: url('/images/spinner.gif');
+    color: transparent;
+  }
+  &.done .inputstatus { background-color: $youdown_red; }
+  
+  #inputurl {
+    margin-bottom: 10px;
+    width: 100%;
+    padding-right: 60px;
+  }
+  
+  .inputcontrols {
+    position: relative;
+    height: 30px;
+    
+    .inputtarget {
+      padding: 5px 0;
+      
+      label { margin-right: 5px; font-size: 14px; font-weight: 700; }
+      select { width: 120px; }
+    }
+    
+    .btn-download {
+      position: absolute;
+      right: 0;
+    }
+  }
+}

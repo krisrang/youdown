@@ -1,0 +1,52 @@
+#queue {
+  padding: 10px 20px;
+  
+  ul {
+    
+    li {
+      background: #fff;
+      border: 1px solid $border;
+      border-radius: $radius;
+      height: 66px;
+      margin-bottom: 10px;
+      padding: 2px;
+      position: relative;
+        
+      .controls {
+        position: absolute;
+        top: 15px;
+        left: 20px;
+        display: none;
+      }
+      
+      &:hover .controls { display: block; }
+      
+      .thumb {
+        float: left;
+        height: 60px;
+        
+        img {
+          border-radius: $radius;
+        }
+      }
+      
+      .title, .info {
+        margin-left: 80px;
+      }
+      
+      .title {
+        font-size: 14px;
+        font-weight: 700;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        padding: 10px 10px 5px;
+      }
+      
+      .info {
+        font-size: 14px;
+        padding: 5px 10px;
+      }
+    }
+  }
+}

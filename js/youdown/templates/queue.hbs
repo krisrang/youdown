@@ -1,0 +1,16 @@
+<div id="queue">
+  <ul>
+    {{#each model.items}}
+      <li class="video">
+        <div class="controls">
+          <button class="btn btn-primary" {{action "cancelVideo" this}}><i class="fa fa-times"></i></button>
+        </div>
+        <div class="thumb">
+          <img height="60" width="80" {{bind-attr src="thumbnailUrl"}} />
+        </div>
+        <div class="title">{{title}}</div>
+        <div class="info">{{desiredFormat.displayText}}</div>
+      </li>
+    {{/each}}
+  </ul>
+</div>
