@@ -136,7 +136,54 @@ input {
   font-size: 14px;
   font-weight: 700;
 }
+#input .inputcontrols .inputtarget select {
+  width: 120px;
+}
 #input .inputcontrols .btn-download {
   position: absolute;
   right: 0;
+}
+
+#queue {
+  padding: 10px 20px;
+}
+#queue ul li {
+  background: #fff;
+  border: 1px solid lightgrey;
+  border-radius: 5px;
+  height: 66px;
+  margin-bottom: 10px;
+  padding: 2px;
+  position: relative;
+}
+#queue ul li .controls {
+  position: absolute;
+  top: 15px;
+  left: 20px;
+  display: none;
+}
+#queue ul li:hover .controls {
+  display: block;
+}
+#queue ul li .thumb {
+  float: left;
+  height: 60px;
+}
+#queue ul li .thumb img {
+  border-radius: 5px;
+}
+#queue ul li .title, #queue ul li .info {
+  margin-left: 80px;
+}
+#queue ul li .title {
+  font-size: 14px;
+  font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 10px 10px 5px;
+}
+#queue ul li .info {
+  font-size: 14px;
+  padding: 5px 10px;
 }

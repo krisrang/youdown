@@ -82,7 +82,7 @@ module.exports = function(grunt) {
         linux32: buildPlatforms.linux32,
         linux64: buildPlatforms.linux64
       },
-      src: ['./css/**', './fonts/**', './images/**', './js/**', './language/**', './node_modules/**', '!./node_modules/bower/**', '!./node_modules/grunt*/**', './Config.rb', './index.html', './package.json', './README.md' ]
+      src: ['./bin/**', './css/**', './fonts/**', './images/**', './js/**', './language/**', './node_modules/**', '!./node_modules/bower/**', '!./node_modules/grunt*/**', './Config.rb', './index.html', './package.json', './README.md' ]
     },
     copy: {
       vendor: {

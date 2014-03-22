@@ -6,8 +6,15 @@ YouDown.InputController = Em.Controller.extend({
   
   actions: {
     download: function() {
-      this.set('status', 'processing');
-      this.set('qualityText', '1080p');
+      if (!this.get('video')) return;
+      
+      var desiredFormat = this.get('selectedTarget') || this.get('video.orderedFormats.firstObject'),
+          video = this.get('video');
+      
+      video.set('desiredFormat', desiredFormat);
+      this.send('addToQueue', video);
+      
+      this.reset();
     }
   },
   
@@ -29,6 +36,7 @@ YouDown.InputController = Em.Controller.extend({
   
   reset: function() {
     this.set('status', 'ready');
+    this.set('videoUrl', null);
     this.set('video', null);
   },
   

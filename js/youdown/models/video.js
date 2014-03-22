@@ -32,7 +32,11 @@ YouDown.Video = Em.Object.extend({
   
   orderedFormats: function() {
     return this.get('formats').sortBy('height').reverse();
-  }.property('formats')
+  }.property('formats'),
+  
+  thumbnailUrl: function() {
+    return 'http://i1.ytimg.com/vi/' + this.get('id') + '/hqdefault.jpg';
+  }.property('id')
 });
 
 YouDown.Video.reopenClass({

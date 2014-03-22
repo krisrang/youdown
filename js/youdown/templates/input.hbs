@@ -6,7 +6,6 @@
     <button class="btn btn-danger btn-download" {{bind-attr disabled="inputsDisabled"}} {{action "download"}}>{{i18n "download"}}</button>
     
     <div class="inputtarget">
-      <label for="targetSelect">{{i18n "result"}}</label>
       {{view Ember.Select id="targetSelect" disabled=inputsDisabled contentBinding="targets" optionLabelPath="content.displayText" optionValuePath="content.id" selectionBinding="selectedTarget"}}
     </div>
   </div>
