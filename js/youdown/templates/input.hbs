@@ -5,8 +5,10 @@
   <div class="inputcontrols">
     <button class="btn btn-danger btn-download" {{bind-attr disabled="inputsDisabled"}} {{action "download"}}>{{i18n "download"}}</button>
     
+    {{#if targets}}
     <div class="inputtarget">
       {{view Ember.Select id="targetSelect" disabled=inputsDisabled contentBinding="targets" optionLabelPath="content.displayText" optionValuePath="content.id" selectionBinding="selectedTarget"}}
     </div>
+    {{/if}}
   </div>
 </div>

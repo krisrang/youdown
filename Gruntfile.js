@@ -88,6 +88,7 @@ module.exports = function(grunt) {
       vendor: {
         files: [
           { src: 'vendor/fontawesome/css/font-awesome.css', dest: 'css/', expand: true, flatten: true },
+          { src: 'vendor/animate.css/animate.css', dest: 'css/', expand: true, flatten: true },
           { src: 'vendor/fontawesome/fonts/*', dest: 'fonts/', expand: true, flatten: true },
           { src: 'vendor/jquery/dist/jquery.js', dest: 'js/vendor/', expand: true, flatten: true },
           { src: 'vendor/lodash/dist/lodash.js', dest: 'js/vendor/', expand: true, flatten: true },

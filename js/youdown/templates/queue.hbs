@@ -1,15 +1,15 @@
 <div id="queue">
   <ul>
     {{#each model.items}}
-      <li class="video">
+      <li class="video animated fadeInDown">
         <div class="controls">
-          <button class="btn btn-primary" {{action "cancelVideo" this}}><i class="fa fa-times"></i></button>
+          <button class="btn btn-warning btn-cancel" {{action "cancelVideo" this}}><i class="fa fa-times"></i></button>
         </div>
         <div class="thumb">
           <img height="60" width="80" {{bind-attr src="thumbnailUrl"}} />
         </div>
         <div class="title">{{title}}</div>
-        <div class="info">{{desiredFormat.displayText}}</div>
+        <div class="info">{{progressText}}</div>
       </li>
     {{/each}}
   </ul>

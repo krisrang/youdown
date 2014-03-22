@@ -1,6 +1,8 @@
 // https://www.youtube.com/watch?v=0xJy2QVJTx8
 
 YouDown.Video = Em.Object.extend({
+  destination: '/Users/kris/downloads',
+  
   process: function(result) {
     var json = JSON.parse(result),
         formats = Em.A([]);
@@ -17,7 +19,9 @@ YouDown.Video = Em.Object.extend({
         id: format.format_id,
         url: format.url,
         height: format.height,
-        vcodec: format.vcodec
+        vcodec: format.vcodec,
+        abr: format.abr,
+        format_note: format.format_note
       });
       
       formats.pushObject(vformat);
@@ -25,6 +29,42 @@ YouDown.Video = Em.Object.extend({
     
     this.set('formats', formats);
   },
+  
+  startDownload: function() {
+    var format = this.get('desiredFormat');
+    if (!format) return;
+    
+    var formatString = [format.get('id')];
+    if (format.get('dashVideo')) {
+      var audio = this.bestAudioFormat();
+      formatString.push(audio.get('id'));
+    }
+    
+    YouDown.YTDL.downloadVideo(this, formatString.join('+')).then(function() {
+      console.log('yay');
+    }, function(err) {
+      console.log(err);
+    });
+  },
+  
+  cancelDownload: function() {
+    
+  },
+  
+  bestAudioFormat: function() {
+    return this.get('formats')
+      .filterBy('audio', true)
+      .sortBy('abr')
+      .get('lastObject');
+  },
+  
+  parseProgress: function(prog) {
+    this.set('progressText', prog);
+  },
+  
+  // progressText: function() {
+  //   return i18n.__(this.get('progress'));
+  // }.property('progress'),
   
   qualityText: function() {
     return this.get('orderedFormats.firstObject.height') + 'p';

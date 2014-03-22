@@ -16,8 +16,23 @@ helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
 Ember.TEMPLATES["input"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
 this.compilerInfo = [4,'>= 1.0.0'];
 helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
-  var buffer = '', stack1, helper, options, escapeExpression=this.escapeExpression, helperMissing=helpers.helperMissing;
+  var buffer = '', stack1, helper, options, escapeExpression=this.escapeExpression, helperMissing=helpers.helperMissing, self=this;
 
+function program1(depth0,data) {
+  
+  var buffer = '';
+  data.buffer.push("\n    <div class=\"inputtarget\">\n      ");
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.Select", {hash:{
+    'id': ("targetSelect"),
+    'disabled': ("inputsDisabled"),
+    'contentBinding': ("targets"),
+    'optionLabelPath': ("content.displayText"),
+    'optionValuePath': ("content.id"),
+    'selectionBinding': ("selectedTarget")
+  },hashTypes:{'id': "STRING",'disabled': "ID",'contentBinding': "STRING",'optionLabelPath': "STRING",'optionValuePath': "STRING",'selectionBinding': "STRING"},hashContexts:{'id': depth0,'disabled': depth0,'contentBinding': depth0,'optionLabelPath': depth0,'optionValuePath': depth0,'selectionBinding': depth0},contexts:[depth0],types:["ID"],data:data})));
+  data.buffer.push("\n    </div>\n    ");
+  return buffer;
+  }
 
   data.buffer.push("<div id=\"input\" ");
   data.buffer.push(escapeExpression(helpers['bind-attr'].call(depth0, {hash:{
@@ -43,16 +58,10 @@ helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
   data.buffer.push(escapeExpression(helpers.action.call(depth0, "download", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["STRING"],data:data})));
   data.buffer.push(">");
   data.buffer.push(escapeExpression((helper = helpers.i18n || (depth0 && depth0.i18n),options={hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["STRING"],data:data},helper ? helper.call(depth0, "download", options) : helperMissing.call(depth0, "i18n", "download", options))));
-  data.buffer.push("</button>\n    \n    <div class=\"inputtarget\">\n      ");
-  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.Select", {hash:{
-    'id': ("targetSelect"),
-    'disabled': ("inputsDisabled"),
-    'contentBinding': ("targets"),
-    'optionLabelPath': ("content.displayText"),
-    'optionValuePath': ("content.id"),
-    'selectionBinding': ("selectedTarget")
-  },hashTypes:{'id': "STRING",'disabled': "ID",'contentBinding': "STRING",'optionLabelPath': "STRING",'optionValuePath': "STRING",'selectionBinding': "STRING"},hashContexts:{'id': depth0,'disabled': depth0,'contentBinding': depth0,'optionLabelPath': depth0,'optionValuePath': depth0,'selectionBinding': depth0},contexts:[depth0],types:["ID"],data:data})));
-  data.buffer.push("\n    </div>\n  </div>\n</div>");
+  data.buffer.push("</button>\n    \n    ");
+  stack1 = helpers['if'].call(depth0, "targets", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0],types:["ID"],data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("\n  </div>\n</div>");
   return buffer;
   
 });
@@ -65,7 +74,7 @@ helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
 function program1(depth0,data) {
   
   var buffer = '', stack1;
-  data.buffer.push("\n      <li class=\"video\">\n        <div class=\"controls\">\n          <button class=\"btn btn-primary\" ");
+  data.buffer.push("\n      <li class=\"video animated fadeInDown\">\n        <div class=\"controls\">\n          <button class=\"btn btn-warning btn-cancel\" ");
   data.buffer.push(escapeExpression(helpers.action.call(depth0, "cancelVideo", "", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0,depth0],types:["STRING","ID"],data:data})));
   data.buffer.push("><i class=\"fa fa-times\"></i></button>\n        </div>\n        <div class=\"thumb\">\n          <img height=\"60\" width=\"80\" ");
   data.buffer.push(escapeExpression(helpers['bind-attr'].call(depth0, {hash:{
@@ -75,7 +84,7 @@ function program1(depth0,data) {
   stack1 = helpers._triageMustache.call(depth0, "title", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("</div>\n        <div class=\"info\">");
-  stack1 = helpers._triageMustache.call(depth0, "desiredFormat.displayText", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
+  stack1 = helpers._triageMustache.call(depth0, "progressText", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("</div>\n      </li>\n    ");
   return buffer;
