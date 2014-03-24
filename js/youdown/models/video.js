@@ -73,8 +73,8 @@ YouDown.Video = Em.Object.extend({
         var matches = text.match(YouDown.Video.progressRegex);        
         if (matches && matches.length > 0) {
           self.set('progressPercent', matches[1]);
-          self.set('totalSize', matches[2]);
-          self.set('speed', matches[3]);
+          self.set('totalSize', YouDown.Utilities(matches[2], 2));
+          self.set('speed', YouDown.Utilities(matches[3], 2));
           self.set('eta', matches[4]);
         }
         

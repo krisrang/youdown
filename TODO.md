@@ -7,7 +7,7 @@ MVP
 * ~~Basic and project setup~~
 * ~~Basic downloading~~
 * ~~Progress parsing and display~~
-* Round values in progress
+* ~~Round values in progress~~
 * Target path select
 * Updating
 
