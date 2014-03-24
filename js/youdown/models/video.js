@@ -46,13 +46,13 @@ YouDown.Video = Em.Object.extend({
     this.set('downloadPath', [this.get('id'), this.get('desiredFormat.ext')].join('.'));
     
     YouDown.YTDL.downloadVideo(this, formatString.join('+')).then(function() {
-      var fs = require('fs'),
+      var mv = require('mv'),
           path = require('path');
           
       var currentPath = path.join(process.cwd(), self.get('downloadPath'));
       var targetPath = path.join(self.get('queue.saveFolder'), self.get('filename'));
       
-      fs.rename(currentPath, targetPath, function(err) {
+      mv(currentPath, targetPath, {mkdirp: true}, function(err) {
         if (err) return self.set('error', err);
         self.set('finished', true);
         self.set('progressPercent', 100);
