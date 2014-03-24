@@ -59,6 +59,7 @@ YouDown.Video = Em.Object.extend({
   },
   
   parseProgress: function(prog) {
+    console.log(prog);
     this.set('progressText', prog);
   },
   

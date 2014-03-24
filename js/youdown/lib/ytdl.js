@@ -24,7 +24,7 @@ YouDown.YTDL = {
   
   downloadVideo: function(video, formats) {
     var command = YouDown.YTDL.getExecutable(),
-        options = ['--id', '-f', formats, video.get('id')];
+        options = ['--newline', '--id', '-f', formats, video.get('id')];
     
     return new Ember.RSVP.Promise(function(resolve, reject){
       var child = require('child_process').execFile(command, options, 
