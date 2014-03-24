@@ -5,7 +5,7 @@
     "url": "https://github.com/krisrang/youdown2"
   },
   "main": "app://host/index.html",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "window": {
     "title": "YouDown",
     "icon": "images/icon.png",
