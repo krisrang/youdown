@@ -11,9 +11,9 @@
     "icon": "images/icon.png",
     "toolbar": false,
     "frame": true,
-    "width": 500,
+    "width": 550,
     "height": 300,
-    "min_width": 500,
+    "min_width": 550,
     "min_height": 300,
     "resizable": true
   },

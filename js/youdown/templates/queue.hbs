@@ -2,6 +2,11 @@
   <ul>
     {{#each model.items}}
       <li class="video animated fadeInDown">
+        <div class="progressbar">
+          <div class="bar" role="bar" {{bind-attr style="progressCss"}}>
+            <div class="peg"></div>
+          </div>
+        </div>
         <div class="controls">
           <button class="btn btn-warning btn-cancel" {{action "cancelVideo" this}}><i class="fa fa-times"></i></button>
         </div>

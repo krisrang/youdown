@@ -92,6 +92,10 @@ input {
 #queue {
   padding: 10px 20px;
 }
+#queue ul {
+  margin: 0;
+  padding: 0;
+}
 #queue ul li {
   background: #fff;
   border: 1px solid lightgrey;
@@ -133,5 +137,32 @@ input {
 }
 #queue ul li .info {
   font-size: 14px;
-  padding: 5px 10px;
+  padding: 0 10px 5px;
+}
+
+.progressbar {
+  position: fixed;
+  top: 35px;
+  left: 92px;
+  right: 12px;
+  overflow: hidden;
+}
+.progressbar .bar {
+  transition: all 200ms ease;
+  -webkit-transition: all 200ms ease;
+  -webkit-transform: translate3d(-100%, 0px, 0px);
+  background: #29D;
+  z-index: 100;
+  height: 2px;
+}
+.progressbar .bar .peg {
+  display: block;
+  position: absolute;
+  right: 0px;
+  width: 100px;
+  height: 100%;
+  box-shadow: 0 0 10px #29D, 0 0 5px #29D;
+  opacity: 1.0;
+  -webkit-transform: rotate(3deg) translate(0px, -4px);
+  transform: rotate(3deg) translate(0px, -4px);
 }

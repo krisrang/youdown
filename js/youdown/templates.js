@@ -74,7 +74,11 @@ helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
 function program1(depth0,data) {
   
   var buffer = '', stack1;
-  data.buffer.push("\n      <li class=\"video animated fadeInDown\">\n        <div class=\"controls\">\n          <button class=\"btn btn-warning btn-cancel\" ");
+  data.buffer.push("\n      <li class=\"video animated fadeInDown\">\n        <div class=\"progressbar\">\n          <div class=\"bar\" role=\"bar\" ");
+  data.buffer.push(escapeExpression(helpers['bind-attr'].call(depth0, {hash:{
+    'style': ("progressCss")
+  },hashTypes:{'style': "STRING"},hashContexts:{'style': depth0},contexts:[],types:[],data:data})));
+  data.buffer.push(">\n            <div class=\"peg\"></div>\n          </div>\n        </div>\n        <div class=\"controls\">\n          <button class=\"btn btn-warning btn-cancel\" ");
   data.buffer.push(escapeExpression(helpers.action.call(depth0, "cancelVideo", "", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0,depth0],types:["STRING","ID"],data:data})));
   data.buffer.push("><i class=\"fa fa-times\"></i></button>\n        </div>\n        <div class=\"thumb\">\n          <img height=\"60\" width=\"80\" ");
   data.buffer.push(escapeExpression(helpers['bind-attr'].call(depth0, {hash:{

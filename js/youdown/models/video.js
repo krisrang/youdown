@@ -1,7 +1,7 @@
 // https://www.youtube.com/watch?v=0xJy2QVJTx8
 
 YouDown.Video = Em.Object.extend({
-  destination: '/Users/kris/downloads',
+  progressPercent: 0,
   
   process: function(result) {
     var json = JSON.parse(result),
@@ -33,7 +33,7 @@ YouDown.Video = Em.Object.extend({
   startDownload: function() {
     var format = this.get('desiredFormat');
     if (!format) return;
-    
+        
     var formatString = [format.get('id')];
     if (format.get('dashVideo')) {
       var audio = this.bestAudioFormat();
@@ -58,14 +58,54 @@ YouDown.Video = Em.Object.extend({
       .get('lastObject');
   },
   
-  parseProgress: function(prog) {
-    console.log(prog);
-    this.set('progressText', prog);
+  parseProgress: function(out) {
+    var self = this,
+        messages = out.split('\n');
+        
+    console.log(out);
+        
+    _.each(messages, function(message) {
+      if (message.indexOf('merging') > 0) return self.set('isMerging', true);
+      
+      if (message.indexOf('download') === 1) {
+        var text = message.replace('[download] ', '');        
+        
+        var matches = text.match(YouDown.Video.progressRegex);        
+        if (matches && matches.length > 0) {
+          self.set('progressPercent', matches[1]);
+          self.set('totalSize', matches[2]);
+          self.set('speed', matches[3]);
+          self.set('eta', matches[4]);
+        }
+        
+        var destinationMatches = text.match(/.*Destination:.*.f(.*)\..*/);
+        if (destinationMatches && destinationMatches.length === 2) {
+          self.set('currentlyDownloadingFormat', destinationMatches[1]);
+        }
+      }
+    });
   },
   
-  // progressText: function() {
-  //   return i18n.__(this.get('progress'));
-  // }.property('progress'),
+  progressText: function() {
+    if (this.get('isMerging')) return i18n.__('merging');
+    
+    var formatId = this.get('currentlyDownloadingFormat'),
+        format = this.get('formats').filterBy('id', formatId)[0],
+        audio = format && format.get('audio'),
+        percent = this.get('progressPercent'),
+        size = this.get('totalSize'),
+        speed = this.get('speed');
+        
+    if (!size) return i18n.__('processing');
+    
+    return i18n.__('downloadProgress', audio ? 'audio' : 'video',
+      percent, size, speed);
+  }.property('currentlyDownloadingFormat', 'progressPercent', 'totalSize', 'speed'),
+  
+  progressCss: function() {
+    var percent = 100 - parseFloat(this.get('progressPercent'));
+    return "-webkit-transform: translate3d(-" + percent + "%, 0px, 0px)";
+  }.property('progressPercent'),
   
   qualityText: function() {
     return this.get('orderedFormats.firstObject.height') + 'p';
@@ -82,6 +122,7 @@ YouDown.Video = Em.Object.extend({
 
 YouDown.Video.reopenClass({
   regex: /^https?:\/\/(www\.)?(youtube\.com\/watch\?v=|youtu\.be\/)([a-zA-Z0-9_\-]{11}).*$/,
+  progressRegex: /(.*%) of (.*)iB at (.*)iB\/s ETA (.*)/,
   
   matches: function(url) {
     return new RegExp(YouDown.Video.regex).test(url);

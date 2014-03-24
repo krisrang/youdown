@@ -1,6 +1,12 @@
 {
 	"title": "YouDown",
 	"download": "Download",
-  "enter_url": "Paste YouTube URL",
-  "ready": "Ready"
+	"enter_url": "Paste YouTube URL",
+	"ready": "Ready",
+	"audio": "audio",
+	"video": "video",
+	"downloadProgress": "Downloading %s: %s of %sB, at %sB/s",
+	"merging": "Merging video+audio streams and moving to destination",
+	"finished": "Finished",
+	"processing": "Processing"
 }

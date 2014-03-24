@@ -1,0 +1,28 @@
+.progressbar {
+  position: fixed;
+  top: 35px;
+  left: 92px;
+  right: 12px;
+  overflow: hidden;
+  
+  .bar {
+    transition: all 200ms ease;
+    -webkit-transition: all 200ms ease;
+    -webkit-transform: translate3d(-100%, 0px, 0px);
+    background: #29D;
+    z-index: 100;
+    height: 2px;
+    
+    .peg {
+      display: block;
+      position: absolute;
+      right: 0px;
+      width: 100px;
+      height: 100%;
+      box-shadow: 0 0 10px #29D, 0 0 5px #29D;
+      opacity: 1.0;
+      -webkit-transform: rotate(3deg) translate(0px, -4px);
+      transform: rotate(3deg) translate(0px, -4px);
+    }
+  }
+}
