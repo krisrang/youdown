@@ -8,5 +8,6 @@
 	"downloadProgress": "Downloading %s: %s of %sB, at %sB/s",
 	"merging": "Merging video+audio streams and moving to destination",
 	"finished": "Finished",
-	"processing": "Processing"
+	"processing": "Processing",
+	"destination": "Destination"
 }

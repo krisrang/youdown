@@ -1,5 +1,11 @@
 #queue {
   padding: 10px 20px;
+  position: absolute;
+  top: 120px;
+  left: 0;
+  right: 0;
+  bottom: 30px;
+  @include scrollable();
   
   ul {
     margin: 0;

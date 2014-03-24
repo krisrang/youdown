@@ -1,4 +1,6 @@
 // https://www.youtube.com/watch?v=0xJy2QVJTx8
+// https://www.youtube.com/watch?v=6acRHWnfZAE
+// https://www.youtube.com/watch?v=nJHKkkarGSw
 
 YouDown.Video = Em.Object.extend({
   progressPercent: 0,
@@ -31,7 +33,8 @@ YouDown.Video = Em.Object.extend({
   },
   
   startDownload: function() {
-    var format = this.get('desiredFormat');
+    var self = this,
+        format = this.get('desiredFormat');
     if (!format) return;
         
     var formatString = [format.get('id')];
@@ -40,10 +43,22 @@ YouDown.Video = Em.Object.extend({
       formatString.push(audio.get('id'));
     }
     
+    this.set('downloadPath', [this.get('id'), this.get('desiredFormat.ext')].join('.'));
+    
     YouDown.YTDL.downloadVideo(this, formatString.join('+')).then(function() {
-      console.log('yay');
+      var fs = require('fs'),
+          path = require('path');
+          
+      var currentPath = path.join(process.cwd(), self.get('downloadPath'));
+      var targetPath = path.join(self.get('queue.saveFolder'), self.get('filename'));
+      
+      fs.rename(currentPath, targetPath, function(err) {
+        if (err) return self.set('error', err);
+        self.set('finished', true);
+        self.set('progressPercent', 100);
+      });      
     }, function(err) {
-      console.log(err);
+      self.set('error', err);
     });
   },
   
@@ -62,10 +77,9 @@ YouDown.Video = Em.Object.extend({
     var self = this,
         messages = out.split('\n');
         
-    console.log(out);
-        
     _.each(messages, function(message) {
-      if (message.indexOf('merging') > 0) return self.set('isMerging', true);
+      if (Em.isEmpty(message)) return;
+      if (message.indexOf('Merging') > 0) return self.set('isMerging', true);
       
       if (message.indexOf('download') === 1) {
         var text = message.replace('[download] ', '');        
@@ -73,8 +87,8 @@ YouDown.Video = Em.Object.extend({
         var matches = text.match(YouDown.Video.progressRegex);        
         if (matches && matches.length > 0) {
           self.set('progressPercent', matches[1]);
-          self.set('totalSize', YouDown.Utilities(matches[2], 2));
-          self.set('speed', YouDown.Utilities(matches[3], 2));
+          self.set('totalSize', matches[2]);
+          self.set('speed', matches[3]);
           self.set('eta', matches[4]);
         }
         
@@ -87,6 +101,8 @@ YouDown.Video = Em.Object.extend({
   },
   
   progressText: function() {
+    if (this.get('error')) return this.get('error');
+    if (this.get('finished')) return i18n.__('finished');
     if (this.get('isMerging')) return i18n.__('merging');
     
     var formatId = this.get('currentlyDownloadingFormat'),
@@ -100,7 +116,7 @@ YouDown.Video = Em.Object.extend({
     
     return i18n.__('downloadProgress', audio ? 'audio' : 'video',
       percent, size, speed);
-  }.property('currentlyDownloadingFormat', 'progressPercent', 'totalSize', 'speed'),
+  }.property('currentlyDownloadingFormat', 'progressPercent', 'totalSize', 'speed', 'isMerging'),
   
   progressCss: function() {
     var percent = 100 - parseFloat(this.get('progressPercent'));

@@ -12,9 +12,9 @@
     "toolbar": false,
     "frame": true,
     "width": 550,
-    "height": 300,
+    "height": 320,
     "min_width": 550,
-    "min_height": 300,
+    "min_height": 320,
     "resizable": true
   },
   "chromium-args": "--enable-smooth-scrolling --ignore-gpu-blacklist --remote-debugging-port=10138 --harmony",

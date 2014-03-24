@@ -40,7 +40,11 @@ input {
   padding: 20px;
   border-bottom: 1px solid lightgrey;
   background: #ededed;
-  position: relative;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 120px;
 }
 #input .inputstatus {
   position: absolute;
@@ -89,8 +93,57 @@ input {
   right: 0;
 }
 
+#downloadpath {
+  display: none;
+}
+
 #queue {
   padding: 10px 20px;
+  position: absolute;
+  top: 120px;
+  left: 0;
+  right: 0;
+  bottom: 30px;
+  overflow-x: hidden;
+  overflow-y: overlay;
+  -webkit-overflow-scrolling: touch;
+}
+#queue::-webkit-scrollbar {
+  background: none;
+  width: 9px;
+}
+#queue::-webkit-scrollbar-button {
+  display: none;
+}
+#queue::-webkit-scrollbar-track {
+  display: none;
+}
+#queue::-webkit-scrollbar-track-piece {
+  display: none;
+}
+#queue::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.2);
+  background-clip: content-box;
+  border-radius: 10px;
+  border: 2px solid transparent;
+}
+#queue::-webkit-scrollbar-corner {
+  display: none;
+}
+#queue::-webkit-resizer {
+  display: none;
+}
+#queue:hover::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.5);
+  background-clip: content-box;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+#queue:hover::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.6);
+  background-clip: content-box;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 #queue ul {
   margin: 0;
@@ -165,4 +218,27 @@ input {
   opacity: 1.0;
   -webkit-transform: rotate(3deg) translate(0px, -4px);
   transform: rotate(3deg) translate(0px, -4px);
+}
+
+#statusbar {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 30px;
+  padding: 5px 20px;
+  border-top: 1px solid lightgrey;
+  background: #ededed;
+}
+#statusbar span {
+  font-size: 14px;
+  font-weight: 700;
+  padding-right: 5px;
+}
+#statusbar button {
+  margin-left: 10px;
+}
+
+#folderchooser {
+  display: none;
 }

@@ -1,4 +1,6 @@
 YouDown.VideoQueue = Em.Object.extend({
+  saveFolder: process.env[(process.platform === 'win32') ? 'USERPROFILE' : 'HOME'],
+  
   items: Em.A([]),
   
   addVideo: function(video) {

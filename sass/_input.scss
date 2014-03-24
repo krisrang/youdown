@@ -2,7 +2,11 @@
   padding: 20px;
   border-bottom: 1px solid $border;
   background: $body_bg;
-  position: relative;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 120px;
   
   .inputstatus {
     position: absolute;
@@ -48,4 +52,8 @@
       right: 0;
     }
   }
+}
+
+#downloadpath {
+  display: none;
 }

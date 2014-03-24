@@ -1,0 +1,7 @@
+<div id="statusbar">
+  <span class="folderDescription">{{i18n "destination"}}:</span>
+  {{saveFolder}}
+  <button class="btn btn-xs btn-default" {{action "chooseFolder"}}>...</button>
+  
+  <input id="folderchooser" type="file" {{bind-attr nwworkingdir="saveFolder"}} nwdirectory />
+</div>

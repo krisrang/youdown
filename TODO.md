@@ -8,7 +8,7 @@ MVP
 * ~~Basic downloading~~
 * ~~Progress parsing and display~~
 * ~~Round values in progress~~
-* Target path select
+* ~~Target path select~~
 * Updating
 
 Later

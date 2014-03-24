@@ -12,8 +12,8 @@ YouDown.InputController = Em.Controller.extend({
           video = this.get('video');
       
       video.set('desiredFormat', desiredFormat);
-      this.send('addToQueue', video);
       
+      this.send('addToQueue', video);     
       this.reset();
     }
   },
@@ -37,6 +37,7 @@ YouDown.InputController = Em.Controller.extend({
   reset: function() {
     this.set('status', 'ready');
     this.set('videoUrl', null);
+    this.set('saveName', null);
     this.set('video', null);
   },
   
@@ -46,6 +47,7 @@ YouDown.InputController = Em.Controller.extend({
     
     YouDown.Video.createVideo(url).then(function(video) {
       self.set('video', video);
+      self.set('saveName', video.get('filename'));
       self.set('status', 'done');
     });
   }

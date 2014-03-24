@@ -8,6 +8,8 @@ helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
   data.buffer.push(escapeExpression((helper = helpers.render || (depth0 && depth0.render),options={hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["STRING"],data:data},helper ? helper.call(depth0, "input", options) : helperMissing.call(depth0, "render", "input", options))));
   data.buffer.push("\n  ");
   data.buffer.push(escapeExpression((helper = helpers.render || (depth0 && depth0.render),options={hash:{},hashTypes:{},hashContexts:{},contexts:[depth0,depth0],types:["STRING","ID"],data:data},helper ? helper.call(depth0, "queue", "model", options) : helperMissing.call(depth0, "render", "queue", "model", options))));
+  data.buffer.push("\n  ");
+  data.buffer.push(escapeExpression((helper = helpers.render || (depth0 && depth0.render),options={hash:{},hashTypes:{},hashContexts:{},contexts:[depth0,depth0],types:["STRING","ID"],data:data},helper ? helper.call(depth0, "statusbar", "model", options) : helperMissing.call(depth0, "render", "statusbar", "model", options))));
   data.buffer.push("\n</div>");
   return buffer;
   
@@ -58,7 +60,7 @@ function program1(depth0,data) {
   data.buffer.push(escapeExpression(helpers.action.call(depth0, "download", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["STRING"],data:data})));
   data.buffer.push(">");
   data.buffer.push(escapeExpression((helper = helpers.i18n || (depth0 && depth0.i18n),options={hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["STRING"],data:data},helper ? helper.call(depth0, "download", options) : helperMissing.call(depth0, "i18n", "download", options))));
-  data.buffer.push("</button>\n    \n    ");
+  data.buffer.push("</button>\n    \n    \n    ");
   stack1 = helpers['if'].call(depth0, "targets", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("\n  </div>\n</div>");
@@ -98,6 +100,28 @@ function program1(depth0,data) {
   stack1 = helpers.each.call(depth0, "model.items", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("\n  </ul>\n</div>");
+  return buffer;
+  
+});
+
+Ember.TEMPLATES["statusbar"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
+this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
+  var buffer = '', stack1, helper, options, helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression;
+
+
+  data.buffer.push("<div id=\"statusbar\">\n  <span class=\"folderDescription\">");
+  data.buffer.push(escapeExpression((helper = helpers.i18n || (depth0 && depth0.i18n),options={hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["STRING"],data:data},helper ? helper.call(depth0, "destination", options) : helperMissing.call(depth0, "i18n", "destination", options))));
+  data.buffer.push(":</span>\n  ");
+  stack1 = helpers._triageMustache.call(depth0, "saveFolder", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("\n  <button class=\"btn btn-xs btn-default\" ");
+  data.buffer.push(escapeExpression(helpers.action.call(depth0, "chooseFolder", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["STRING"],data:data})));
+  data.buffer.push(">...</button>\n  \n  <input id=\"folderchooser\" type=\"file\" ");
+  data.buffer.push(escapeExpression(helpers['bind-attr'].call(depth0, {hash:{
+    'nwworkingdir': ("saveFolder")
+  },hashTypes:{'nwworkingdir': "STRING"},hashContexts:{'nwworkingdir': depth0},contexts:[],types:[],data:data})));
+  data.buffer.push(" nwdirectory />\n</div>");
   return buffer;
   
 });
