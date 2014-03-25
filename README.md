@@ -3,4 +3,6 @@ YouDown 2
 
 YouTube video downloader for Mac and Windows.
 
-Successor to [YouDown](https://github.com/krisrang/YouDown)
+!(https://raw.githubusercontent.com/krisrang/youdown/master/res/screenshot-mac.png)
+
+Successor to [YouDown](https://github.com/krisrang/youdown-old)
