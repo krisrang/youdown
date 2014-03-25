@@ -56,25 +56,29 @@ YouDown.Video = Em.Object.extend({
     
     this.set('downloadPath', [this.get('id'), this.get('desiredFormat.ext')].join('.'));
     
-    YouDown.YTDL.downloadVideo(this, formatString.join('+')).then(function() {
-      var mv = require('mv'),
-          path = require('path');
-          
-      var currentPath = path.join(process.cwd(), self.get('downloadPath'));
-      var targetPath = path.join(self.get('queue.saveFolder'), self.get('filename'));
-      
-      mv(currentPath, targetPath, {mkdirp: true}, function(err) {
-        if (err) return self.set('error', err);
-        self.set('finished', true);
-        self.set('progressPercent', 100);
-      });      
-    }, function(err) {
+    var download = YouDown.Download.start(this, formatString.join('+'));
+    
+    download.on('progress', function(out) { 
+      self.parseProgress(out);
+    });
+    
+    download.on('finish', function(err) {
+      if (err) return self.set('error', err);
+      self.set('finished', true);
+      self.set('progressPercent', 100);
+    });
+    
+    download.on('error', function(err) {
       self.set('error', err);
     });
+    
+    this.set('download', download);
+    download.begin();
   },
   
   cancelDownload: function() {
-    
+    var download = this.get('download');
+    if (download && download.cancel) download.cancel();
   },
   
   bestAudioFormat: function() {

@@ -10,7 +10,7 @@ MVP
 * ~~Round values in progress~~
 * ~~Target path select~~
 * ~~Simplify format list~~
-* Allow cancelling download
+* ~~Allow cancelling download~~
 * Updating
 
 Later
