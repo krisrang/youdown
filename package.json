@@ -17,7 +17,7 @@
     "min_height": 320,
     "resizable": true
   },
-  "chromium-args": "--enable-smooth-scrolling --ignore-gpu-blacklist --remote-debugging-port=10138 --harmony",
+  "chromium-args": "--remote-debugging-port=10138",
   "scripts": {
     "start": "grunt",
     "build": "grunt build",

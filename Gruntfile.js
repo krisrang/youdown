@@ -86,7 +86,7 @@ module.exports = function(grunt) {
             './language/**', './node_modules/**', '!./node_modules/bower/**', 
             '!./node_modules/ember-template-compiler/**', '!./node_modules/grunt*/**',
             '!./node_modules/handlebars/**', './Config.rb', './index.html', 
-            './package.json', './README.md' ]
+            './package.json' ]
     },
     copy: {
       vendor: {

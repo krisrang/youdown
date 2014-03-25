@@ -131,7 +131,7 @@ YouDown.Video = Em.Object.extend({
     
     return i18n.__('downloadProgress', audio ? 'audio' : 'video',
       percent, size, speed);
-  }.property('currentlyDownloadingFormat', 'progressPercent', 'totalSize', 'speed', 'isMerging'),
+  }.property('currentlyDownloadingFormat', 'progressPercent', 'totalSize', 'speed', 'isMerging', 'error'),
   
   progressCss: function() {
     var percent = 100 - parseFloat(this.get('progressPercent'));
