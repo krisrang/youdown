@@ -28,7 +28,7 @@ function program1(depth0,data) {
     'id': ("targetSelect"),
     'disabled': ("inputsDisabled"),
     'contentBinding': ("targets"),
-    'optionLabelPath': ("content.displayText"),
+    'optionLabelPath': ("content.resolution"),
     'optionValuePath': ("content.id"),
     'selectionBinding': ("selectedTarget")
   },hashTypes:{'id': "STRING",'disabled': "ID",'contentBinding': "STRING",'optionLabelPath': "STRING",'optionValuePath': "STRING",'selectionBinding': "STRING"},hashContexts:{'id': depth0,'disabled': depth0,'contentBinding': depth0,'optionLabelPath': depth0,'optionValuePath': depth0,'selectionBinding': depth0},contexts:[depth0],types:["ID"],data:data})));

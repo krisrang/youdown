@@ -9,6 +9,8 @@ MVP
 * ~~Progress parsing and display~~
 * ~~Round values in progress~~
 * ~~Target path select~~
+* ~~Simplify format list~~
+* Allow cancelling download
 * Updating
 
 Later

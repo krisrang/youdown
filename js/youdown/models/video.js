@@ -14,19 +14,30 @@ YouDown.Video = Em.Object.extend({
     this.set('filename', json["_filename"]);
     
     _.each(json["formats"], function(format) {
-      if (format['ext'] === 'webm' || format['ext'] === '3gp') return;
+      var resolution = format.resolution || format.height + 'p';
       
-      var vformat = YouDown.VideoFormat.create({
-        ext: format.ext,
-        id: format.format_id,
-        url: format.url,
+      var newFormat = YouDown.VideoFormat.create({
+        format_note: format.format_note,
+        preference: format.preference || 0,
+        resolution: resolution,
+        id: format.format_id,        
         height: format.height,
         vcodec: format.vcodec,
+        ext: format.ext,
+        url: format.url,
         abr: format.abr,
-        format_note: format.format_note
+        display: false
       });
       
-      formats.pushObject(vformat);
+      formats.pushObject(newFormat);
+    });
+    
+    _.each(YouDown.Video.formatList, function(format) {
+      var candidate = formats.filterBy('resolution', format)
+                        .sortBy('preference')
+                        .get('lastObject');
+                        
+      if (candidate) candidate.set('display', true);
     });
     
     this.set('formats', formats);
@@ -124,21 +135,22 @@ YouDown.Video = Em.Object.extend({
   }.property('progressPercent'),
   
   qualityText: function() {
-    return this.get('orderedFormats.firstObject.height') + 'p';
-  }.property('formats'),
-  
-  orderedFormats: function() {
-    return this.get('formats').sortBy('height').reverse();
-  }.property('formats'),
+    return this.get('orderedFormats.firstObject.resolution');
+  }.property('orderedFormats'),
   
   thumbnailUrl: function() {
     return 'http://i1.ytimg.com/vi/' + this.get('id') + '/hqdefault.jpg';
-  }.property('id')
+  }.property('id'),
+  
+  orderedFormats: function() {
+    return this.get('formats').filterBy('display', true).sortBy('height').reverse();
+  }.property('formats', 'formats.@each.height', 'formats.@each.audio')
 });
 
 YouDown.Video.reopenClass({
   regex: /^https?:\/\/(www\.)?(youtube\.com\/watch\?v=|youtu\.be\/)([a-zA-Z0-9_\-]{11}).*$/,
   progressRegex: /(.*%) of (.*)iB at (.*)iB\/s ETA (.*)/,
+  formatList: ['1080p', '720p', '480p', '360p', '240p'],
   
   matches: function(url) {
     return new RegExp(YouDown.Video.regex).test(url);

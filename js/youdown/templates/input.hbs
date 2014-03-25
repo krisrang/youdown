@@ -8,7 +8,7 @@
     
     {{#if targets}}
     <div class="inputtarget">
-      {{view Ember.Select id="targetSelect" disabled=inputsDisabled contentBinding="targets" optionLabelPath="content.displayText" optionValuePath="content.id" selectionBinding="selectedTarget"}}
+      {{view Ember.Select id="targetSelect" disabled=inputsDisabled contentBinding="targets" optionLabelPath="content.resolution" optionValuePath="content.id" selectionBinding="selectedTarget"}}
     </div>
     {{/if}}
   </div>

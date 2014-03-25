@@ -14,14 +14,14 @@ YouDown.InputController = Em.Controller.extend({
       video.set('desiredFormat', desiredFormat);
       
       this.send('addToQueue', video);     
-      this.reset();
+      this.reset(true);
     }
   },
   
   urlChange: function() {
     var url = this.get('videoUrl');
     if (YouDown.Video.matches(url)) return this.process(url);
-    return this.reset();
+    return this.reset(false);
   }.observes('videoUrl'),
   
   inputsDisabled: function() {
@@ -34,11 +34,11 @@ YouDown.InputController = Em.Controller.extend({
     return this.get('video.orderedFormats');
   }.property('video'),
   
-  reset: function() {
+  reset: function(cleanUrl) {
     this.set('status', 'ready');
-    this.set('videoUrl', null);
     this.set('saveName', null);
     this.set('video', null);
+    if (cleanUrl) this.set('videoUrl', null);
   },
   
   process: function(url) {
