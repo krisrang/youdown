@@ -113,12 +113,12 @@ Section ; App Files
   SetOutPath "$INSTDIR\app"
 
   ;Add the files
-  File /r "..\..\bin\*"
-  File /r "..\..\css\*"
-  File /r "..\..\fonts\*"
-  File /r "..\..\images\*"
-  File /r "..\..\js\*"
-  File /r "..\..\language\*"
+  File /r /x "node_modules" /x "vendor" "..\..\bin"
+  File /r /x "node_modules" /x "vendor" "..\..\css"
+  File /r /x "node_modules" /x "vendor" "..\..\fonts"
+  File /r /x "node_modules" /x "vendor" "..\..\images"
+  File /r /x "node_modules" /x "vendor" "..\..\js"
+  File /r /x "node_modules" /x "vendor" "..\..\language"
   File /r /x "grunt*" /x "grunt" /x "bower" /x "ember-template-compiler" /x "handlebars" "..\..\node_modules"
   File "..\..\index.html"
   File "..\..\package.json"

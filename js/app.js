@@ -74,9 +74,10 @@ var ravenClient = new raven.Client(config.raven);
 window.RavenClient = ravenClient;
 
 if (!isDebug) {
-  ravenClient.patchGlobal(function(logged, err) {
-    // if (console) console.log(err);
-    process.exit(1);
+  process.on('uncaughtException', function(err) {
+    if (console && console.log) console.log(err);
+    var e = new require('nwglobal').Error(err);
+    ravenClient.captureError(e);
   });
 }
 
