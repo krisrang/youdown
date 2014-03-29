@@ -73,22 +73,40 @@ module.exports = function(grunt) {
       }
     },
     nodewebkit: {
-      options: {
-        version: '0.9.2',
-        build_dir: './build',
-        embed_nw: false, // Don't embed the .nw package in the binary
-        keep_nw: true,
-        mac_icns: './images/youdown.icns',
-        mac: buildPlatforms.mac,
-        win: buildPlatforms.win,
-        linux32: buildPlatforms.linux32,
-        linux64: buildPlatforms.linux64
-      },
-      src: ['./bin/**', './css/**', './fonts/**', './images/**', './js/**', 
-            './language/**', './node_modules/**', '!./node_modules/bower/**', 
-            '!./node_modules/ember-template-compiler/**', '!./node_modules/grunt*/**',
-            '!./node_modules/handlebars/**', './index.html', 
-            './package.json' ]
+      dist: {
+        options: {
+          version: '0.9.2',
+          build_dir: './build',
+          embed_nw: false, // Don't embed the .nw package in the binary
+          keep_nw: true,
+          mac_icns: './images/youdown.icns',
+          mac: buildPlatforms.mac,
+          win: buildPlatforms.win,
+          linux32: buildPlatforms.linux32,
+          linux64: buildPlatforms.linux64
+        },
+        src: ['./bin/**', './css/**', './fonts/**', './images/**', './js/**', 
+              './language/**', './node_modules/**', '!./node_modules/bower/**', 
+              '!./node_modules/ember-template-compiler/**', '!./node_modules/grunt*/**',
+              '!./node_modules/handlebars/**', './index.html', 
+              './package.json' ]
+      },      
+      build: {
+        options: {
+          version: '0.9.2',
+          build_dir: './build',
+          mac_icns: './images/youdown.icns',
+          mac: buildPlatforms.mac,
+          win: buildPlatforms.win,
+          linux32: buildPlatforms.linux32,
+          linux64: buildPlatforms.linux64
+        },
+        src: ['./bin/**', './css/**', './fonts/**', './images/**', './js/**', 
+              './language/**', './node_modules/**', '!./node_modules/bower/**', 
+              '!./node_modules/ember-template-compiler/**', '!./node_modules/grunt*/**',
+              '!./node_modules/handlebars/**', './index.html', 
+              './package.json' ]
+      }
     },
     copy: {
       vendor: {
@@ -118,7 +136,7 @@ module.exports = function(grunt) {
           },
           {
             src: 'lib/win/ffmpegsumo.dll',
-            dest: 'build/cache/win/<%= nodewebkit.options.version %>/ffmpegsumo.dll',
+            dest: 'build/cache/win/<%= nodewebkit.build.options.version %>/ffmpegsumo.dll',
             flatten: true
           },
           {
@@ -128,7 +146,7 @@ module.exports = function(grunt) {
           },
           {
             src: 'lib/mac/ffmpegsumo.so',
-            dest: 'build/cache/mac/<%= nodewebkit.options.version %>/node-webkit.app/Contents/Frameworks/node-webkit Framework.framework/Libraries/ffmpegsumo.so',
+            dest: 'build/cache/mac/<%= nodewebkit.build.options.version %>/node-webkit.app/Contents/Frameworks/node-webkit Framework.framework/Libraries/ffmpegsumo.so',
             flatten: true
           },
           {
@@ -138,7 +156,7 @@ module.exports = function(grunt) {
           },
           {
             src: 'lib/linux64/libffmpegsumo.so',
-            dest: 'build/cache/linux64/<%= nodewebkit.options.version %>/libffmpegsumo.so',
+            dest: 'build/cache/linux64/<%= nodewebkit.build.options.version %>/libffmpegsumo.so',
             flatten: true
           }
         ]
@@ -181,8 +199,18 @@ module.exports = function(grunt) {
 
   grunt.registerTask('assets', ['concurrent:assets']);
   grunt.registerTask('assets:build', ['assets', 'copy:build']);
-  grunt.registerTask('nodewkbuild', ['nodewebkit', 'copy:libs']);
   
   grunt.registerTask('default', ['assets', 'concurrent:debug']);
-  grunt.registerTask('build', ['assets:build', 'nodewkbuild']);
+  
+  grunt.registerTask('build', [
+    'assets:build',
+    'nodewebkit:build',
+    'copy:libs'
+  ]);
+  
+  grunt.registerTask('dist', [
+    'assets:build',
+    'nodewebkit:dist',
+    'copy:libs'
+  ]);
 };
