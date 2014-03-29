@@ -10,6 +10,7 @@
     "DS": true,
     "win": true,
     "config": true,
+    "Settings": true,
     "isDebug": true,
     "YouDown": true,
     "$": true,
@@ -18,7 +19,7 @@
     "RavenClient": true
   },
   "node" : true,
-  "browser" : false,
+  "browser" : true,
   "boss" : true,
   "curly": false,
   "debug": false,

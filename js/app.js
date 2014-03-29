@@ -6,7 +6,7 @@ var applicationRoot = './',
     path            = require('path'),
     fs              = require('fs'),
     url             = require('url'),
-    i18n            = require("i18n"),
+    i18n            = require('i18n'),
     raven           = require("raven"),
     
     _               = require('./js/vendor/lodash'),
@@ -21,7 +21,7 @@ if (isOSX) { config.button_order = ['close', 'min', 'max']; }
 
 // Not debugging, hide all messages!
 if (!isDebug) {
-  console.log = function () {};
+  console.log = function() {};
 } else {
   // Developer Menu building
   var menubar = new gui.Menu({ type: 'menubar' }),
@@ -79,3 +79,9 @@ if (!isDebug) {
     process.exit(1);
   });
 }
+
+i18n.configure({
+  defaultLocale: 'en',
+  locales: ['en'],
+  directory: './language'
+});

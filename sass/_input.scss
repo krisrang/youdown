@@ -39,6 +39,7 @@
   .inputcontrols {
     position: relative;
     height: 30px;
+    display: none;
     
     .inputtarget {
       padding: 5px 0;
@@ -52,6 +53,8 @@
       right: 0;
     }
   }
+  
+  &.done .inputcontrols { display: block; }
 }
 
 #downloadpath {

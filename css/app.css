@@ -76,6 +76,7 @@ input {
 #input .inputcontrols {
   position: relative;
   height: 30px;
+  display: none;
 }
 #input .inputcontrols .inputtarget {
   padding: 5px 0;
@@ -91,6 +92,9 @@ input {
 #input .inputcontrols .btn-download {
   position: absolute;
   right: 0;
+}
+#input.done .inputcontrols {
+  display: block;
 }
 
 #downloadpath {

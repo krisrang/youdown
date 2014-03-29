@@ -76,6 +76,8 @@ module.exports = function(grunt) {
       options: {
         version: '0.9.2',
         build_dir: './build',
+        embed_nw: false, // Don't embed the .nw package in the binary
+        keep_nw: true,
         mac_icns: './images/youdown.icns',
         mac: buildPlatforms.mac,
         win: buildPlatforms.win,
@@ -85,7 +87,7 @@ module.exports = function(grunt) {
       src: ['./bin/**', './css/**', './fonts/**', './images/**', './js/**', 
             './language/**', './node_modules/**', '!./node_modules/bower/**', 
             '!./node_modules/ember-template-compiler/**', '!./node_modules/grunt*/**',
-            '!./node_modules/handlebars/**', './Config.rb', './index.html', 
+            '!./node_modules/handlebars/**', './index.html', 
             './package.json' ]
     },
     copy: {
