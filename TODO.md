@@ -11,7 +11,7 @@ MVP
 * ~~Target path select~~
 * ~~Simplify format list~~
 * ~~Allow cancelling download~~
-* Updating
+* ~~Updating~~
 
 Later
 ---

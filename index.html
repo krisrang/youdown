@@ -5,6 +5,22 @@
     <link rel="stylesheet" type="text/css" href="css/app.css">
   </head>
   <body>
+    <div id="notification"></div>
+    <div id="changelog-container"></div>
+    
+    <script id="changelog-tpl" type="text/x-template">
+      <a class="btn-close"><i class="fa fa-times"></i></a>
+      <h1><%= title %></h1>
+      <h3><%= description %></h3>
+      <ul>
+      <% for(var i = 0; i < changeLog.length; i++) { %>
+        <li><%= changeLog[i] %></li>
+      <% } %>
+      </ul>
+    </script>
+    
+    <div id="container"></div>
+    
     <!-- nw setup  -->
     <script src="js/settings.js"></script>
     <script src="js/app.js"></script>

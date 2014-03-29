@@ -1,5 +1,6 @@
 (function() {
   function testInstalled() {
+    return true;
     return (!_.contains(require('fs').readdirSync('.'), '.git') || // Test Development
             ( // Test Windows
               Settings.get('os') === 'windows' && 
@@ -90,10 +91,10 @@
       '<h1>' + updateData.title + ' Installed</h1>'   +
       '<p>&nbsp;- ' + updateData.description + '</p>' +
       '<span class="btn-grp">'                        +
-        '<a class="btn chnglog">Changelog</a>'        +
-        '<a class="btn restart">Restart Now</a>'      +
+        '<a class="btn btn-default chnglog">Changelog</a>'        +
+        '<a class="btn btn-warning restart">Restart Now</a>'      +
       '</span>'
-    ).addClass('blue');
+    );
 
     var $restart = $('.btn.restart'),
         $chnglog = $('.btn.chnglog');
@@ -189,7 +190,7 @@
         downloadRequest.pipe(fs.createWriteStream(outputFile));
         downloadRequest.on('complete', function() {
           var hash = crypto.createHash('SHA1'),
-              verify = crypto.createVerify('DSA-SHA1');
+              verify = crypto.createVerify('RSA-SHA1');
           
           fs.createReadStream(outputFile)
             .on('data', function(chunk) {

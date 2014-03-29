@@ -1,0 +1,90 @@
+#notification {
+  @include box-sizing(border-box);
+  position: absolute;
+  top: 0;
+  height: $notification_height;
+  left: 0px;
+  right: 0px;
+  font-size: 13px;
+  font-weight: bold;
+  line-height: 27px;
+  padding: 9px 15px;
+  background: #04C0CD;
+  color: #fff;
+  border-top: none;
+  display: none;
+  z-index: 9000;
+
+  h1 {
+    margin: 0;
+    font-size: 18px;
+  }
+
+  .btn-grp {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+  }
+
+  .btn.chnglog {
+    margin-right: 5px;
+  }
+}
+
+#changelog-container {
+  position: absolute;
+  left: 0; top: $notification_height;
+  height: 100%;
+  width: 100%;
+  padding: 30px;
+  padding-left: 70px;
+  background: rgba(0, 0, 0, 0.93);
+  display: none;
+  z-index: 9000;
+  color: #ccc;
+
+  .btn-close {
+    position: absolute;
+    z-index: 9999;
+    top: 19px;
+    left: 15px;
+    cursor: pointer;
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+
+  h1 {
+    font-weight: bold;
+    font-size: 30px;
+  }
+
+  h3 {
+    font-style: italic;
+    font-size: 15px;
+  }
+
+  ul {
+    margin-top: 10px;
+    padding-left: 20px;
+    list-style-type: square;
+
+    li {
+      margin: 10px 0;
+      line-height: 20px;
+    }
+  }
+}
+
+body.has-notification {
+  #input {
+    top: $notification_height;
+  }
+  
+  #queue {
+    top: $notification_height + 120px;
+  }
+
+  #notification { display: block; }
+}
