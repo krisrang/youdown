@@ -117,7 +117,7 @@ Section ; App Files
   File /r /x "node_modules" /x "vendor" "..\..\css"
   File /r /x "node_modules" /x "vendor" "..\..\fonts"
   File /r /x "node_modules" /x "vendor" "..\..\images"
-  File /r /x "node_modules" /x "vendor" "..\..\js"
+  File /r /x "node_modules" "..\..\js"
   File /r /x "node_modules" /x "vendor" "..\..\language"
   File /r /x "grunt*" /x "grunt" /x "bower" /x "ember-template-compiler" /x "handlebars" "..\..\node_modules"
   File "..\..\index.html"

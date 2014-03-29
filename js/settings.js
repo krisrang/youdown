@@ -1,7 +1,7 @@
 window.Settings = {
   "_defaultSettings": {
     // Default to the first beta
-    "version": "0.2.0",
+    "version": "0.3.0",
     // Used to check for the latest version
     "updateNotificationUrl": "http://youdown.kristjanrang.eu/update.json"
   },
